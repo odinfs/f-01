@@ -4,21 +4,6 @@ import * as ReactDOM from "react-dom";
 import {Routes, Route, Link, BrowserRouter, useNavigate} from "react-router-dom";
 
 
-const MOVIES = [
-    {
-        title: "Harry Potter og de vise sten",
-        year: "1999",
-        plot: "Harry Potter og vennene hans finner en vis sten."
-    },
-    {
-        title: "Humlesnurr og de lange beina",
-        year: "1877",
-        plot: "Humlesnurr finner ut at han har lange bein."
-    }
-];
-
-
-
 function FrontPage() {
     return <div>
         <h1>A very awesome film database</h1>
@@ -81,7 +66,15 @@ function NewMovie({moviesApi}) {
 
 function Application() {
     const moviesApi = {
-        onAddMovie: async (m) =>  MOVIES.push(m),
+        onAddMovie: async (m) => {
+            await fetch("/api/movies", {
+                method: "POST",
+                headers: {
+                    "content-type": "application/json"
+                },
+                body: JSON.stringify(m)
+            })
+        },
         listMovies: async () => {
             const res = await fetch("/api/movies");
             return res.json();
