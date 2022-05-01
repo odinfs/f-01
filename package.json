@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "parcel index.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -16,5 +17,12 @@
   "bugs": {
     "url": "https://github.com/odinfs/f-01/issues"
   },
-  "homepage": "https://github.com/odinfs/f-01#readme"
+  "homepage": "https://github.com/odinfs/f-01#readme",
+  "devDependencies": {
+    "parcel": "^2.5.0",
+    "react": "^18.1.0"
+  },
+  "dependencies": {
+    "react-dom": "^18.1.0"
+  }
 }
