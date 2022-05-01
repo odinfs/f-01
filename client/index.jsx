@@ -1,12 +1,12 @@
-import * as ReactDOM from "react-dom";
 import * as React from "react";
-import {Routes, Route, Link, BrowserRouter, useNavigate} from "react-router-dom";
 import {useState, useEffect} from "react";
+import * as ReactDOM from "react-dom";
+import {Routes, Route, Link, BrowserRouter, useNavigate} from "react-router-dom";
 
 
 const MOVIES = [
     {
-        title: "Harry Potter og de vise sten hei",
+        title: "Harry Potter og de vise sten",
         year: "1999",
         plot: "Harry Potter og vennene hans finner en vis sten."
     },
@@ -15,23 +15,24 @@ const MOVIES = [
         year: "1877",
         plot: "Humlesnurr finner ut at han har lange bein."
     }
-]
+];
 
 
 
 function FrontPage() {
-    return <div><h1>A very awesome film database</h1>
+    return <div>
+        <h1>A very awesome film database</h1>
         <ul>
             <li><Link to="/movies">List movies</Link></li>
-            <li><Link to="/movies/new/">New movies</Link></li>
+            <li><Link to="/movies/new">New Movie</Link></li>
         </ul>
-    </div>
+    </div>;
 }
 
 function ListMovies({moviesApi}) {
     const [movies, setMovies] = useState();
     useEffect(async () => {
-        console.log("hei")
+        console.log("hei");
         setMovies(undefined);
         setMovies(await moviesApi.listMovies());
     }, []);
@@ -41,8 +42,8 @@ function ListMovies({moviesApi}) {
     }
 
     return <div>
-        <h1>List Movies</h1>
-            {MOVIES.map(m =>
+        <h1>No Movies</h1>
+            {movies.map(m =>
                 <div key={m.title}>
                     <h2>{m.title} ({m.year})</h2>
                     <div>{m.plot}</div>
@@ -51,23 +52,20 @@ function ListMovies({moviesApi}) {
     </div>;
 }
 
-    function NewMovie({moviesApi}) {
-        const [title, setTitle] = useState("");
-        const [year, setYear] = useState("");
-        const [plot, setPlot] = useState("");
+function NewMovie({moviesApi}) {
+    const [title, setTitle] = useState("");
+    const [year, setYear] = useState("");
+    const [plot, setPlot] = useState("");
 
-        const navigate = useNavigate();
-
-
-
-    async function handleSubmit(e){
+    const navigate = useNavigate();
+    async function handleSubmit(e) {
         e.preventDefault();
         await moviesApi.onAddMovie({title, year, plot});
         navigate("/");
     }
 
     return <form onSubmit={handleSubmit}>
-        <h1>NewMovie</h1>
+        <h1>New movie</h1>
         <div>
             <label>Title: <input value={title} onChange={e => setTitle(e.target.value)} /></label>
         </div>
@@ -78,25 +76,25 @@ function ListMovies({moviesApi}) {
             <label>Plot: <textarea value={plot} onChange={e => setPlot(e.target.value)} /></label>
         </div>
         <button>Submit</button>
-    </form>
+    </form>;
 }
 
 function Application() {
     const moviesApi = {
-        onAddMovie: async (m) => MOVIES.push(m),
-        listMovies: async (m) => {
-            const res = await fetch("api/movies");
+        onAddMovie: async (m) =>  MOVIES.push(m),
+        listMovies: async () => {
+            const res = await fetch("/api/movies");
             return res.json();
         }
     }
 
     return <BrowserRouter>
         <Routes>
-            <Route path="/" element={<FrontPage />}/>
+            <Route path="/" element={<FrontPage/>}/>
             <Route path="/movies/new" element={<NewMovie moviesApi={moviesApi}/>}/>
             <Route path="/movies" element={<ListMovies moviesApi={moviesApi}/>}/>
         </Routes>
-    </BrowserRouter>
+    </BrowserRouter>;
 }
 
 ReactDOM.render(

@@ -5,12 +5,12 @@ const app = express();
 
 const MOVIES = [
     {
-        title: "Harry Potter og de vise sten",
+        title: "Harry Potter og de vise sten - from server",
         year: "1999",
         plot: "Harry Potter og vennene hans finner en vis sten."
     },
     {
-        title: "Humlesnurr og de lange beina",
+        title: "Humlesnurr og de lange beina - from server",
         year: "1877",
         plot: "Humlesnurr finner ut at han har lange bein."
     }
