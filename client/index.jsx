@@ -6,7 +6,7 @@ import {useState, useEffect} from "react";
 
 const MOVIES = [
     {
-        title: "Harry Potter og de vise sten",
+        title: "Harry Potter og de vise sten hei",
         year: "1999",
         plot: "Harry Potter og vennene hans finner en vis sten."
     },
@@ -84,7 +84,10 @@ function ListMovies({moviesApi}) {
 function Application() {
     const moviesApi = {
         onAddMovie: async (m) => MOVIES.push(m),
-        listMovies: async (m) => MOVIES
+        listMovies: async (m) => {
+            const res = await fetch("api/movies");
+            return res.json();
+        }
     }
 
     return <BrowserRouter>
