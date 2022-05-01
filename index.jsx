@@ -7,13 +7,13 @@ import {useState, useEffect} from "react";
 const MOVIES = [
     {
         title: "Harry Potter og de vise sten",
-        plot: "Harry Potter og vennene hans finner en vis sten.",
-        year: "1999"
+        year: "1999",
+        plot: "Harry Potter og vennene hans finner en vis sten."
     },
     {
         title: "Humlesnurr og de lange beina",
-        plot: "Humlesnurr finner ut at han har lange bein.",
-        year: "1877"
+        year: "1877",
+        plot: "Humlesnurr finner ut at han har lange bein."
     }
 ]
 
