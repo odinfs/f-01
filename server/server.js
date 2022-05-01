@@ -35,6 +35,6 @@ app.use((req, res) => {
     res.sendFile(path.resolve("..", "client", "dist", "index.html"));
 })
 
-const server = app.listen(3000, () => {
-    console.log(`Started server on http://localhost:${server.address().port}`);
+const server = app.listen(process.env.PORT || 3000, () => {
+    console.log(`Startet nodemon on http://localhost:${server.address().port}`);
 });
